@@ -31,15 +31,101 @@ class BSTNode:
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        if target == self.value:
+            return True
+        else: 
+            if target < self.value:
+                if not self.left:
+                    return False
+                else:
+                    return self.left.contains(target)
+            else:
+                if not self.right:
+                    return False
+                else:
+                    return self.right.contains(target)
+
+    # def contains(self, target):
+    #     if self.value == target:
+    #         return True
+    #     if target < self.value:
+    #         if not self.left:
+    #             return False
+    #         else:
+    #             return self.left.contains(target)
+    #     else:
+    #         if not self.right:
+    #             return False
+    #         else:
+    #             return self.right.contains(target)
 
     # Return the maximum value found in the tree
+
     def get_max(self):
-        pass
+        if self.right == None:
+            return self.value
+        else:
+            return self.right.get_max()
+
+    # def get_max(self):
+    #     if not self.right:
+    #         return self.value
+    #     return self.right.get_max()
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        # this method wants to traverse every tree node
+        # this has to call the fn on self.value
+        fn(self.value)
+
+        # how do we propagate to all the other nodes in the tree
+        # is there a left child?
+        if self.left:
+            #if yes call its 'for_each' with the same fn
+            self.left.for_each(fn)
+        # is there a right child?
+        if self.right:
+            # if yes call its 'for_each' with the same fn
+            self.right.for_each(fn)
+
+    # def iter_depth_first_for_each()
+    #     #with depth first traversal there is a certain order to when we visit nodes
+    #     # what's that order?
+    #     # init a stack to keep track of order of nodes visited
+    #     stack = []
+    #     # add first node to stack
+    #     stack.append(self)
+    #     # continue traversing until our stack is empty
+    #     while len(stack) > 0:
+    #         # pop off the stack
+    #         current_node = stack.pop()
+    #         # add its children to the stack
+    #         # add the right child first and left child second
+    #         # to ensure that left is poped off the stack first
+    #         if current_node.right:
+    #             stack.append(current_node.right)
+    #         if current_node.left:
+    #             stack.append(current_node.left)
+    #         # call the fn function on self.value
+    #         fn(self.value)
+
+    # def iter_breadth_first_search(self, fn):
+    #     # breadth first traversal follows FIFO ordering of its nodes
+    #     # init a deque
+    #     q = deque()
+    #     # add the first node to our q
+    #     q.append(self)
+
+    #     while len(q) > 0:
+    #         current_node = q.popleft()
+    #         if current_node.left:
+    #             q.append(current_node.left)
+    #         if current_node.right:
+    #             q.append(current_node.right)
+    #         fn(self.value)
+
+
+
 
     # Part 2 -----------------------
 
